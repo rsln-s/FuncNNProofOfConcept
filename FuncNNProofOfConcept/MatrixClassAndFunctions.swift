@@ -18,11 +18,19 @@ class Matrix{
     init(elements : [Double], rowsNum : Int, columnsNum : Int){
         if elements.count != rowsNum * columnsNum {
             print("Error in Matrix init: incorrect size of elements array")
+            
             self.elements = []
             self.rowsNum = 0
             self.columnsNum = 0
         }
         self.elements = elements
+        self.rowsNum = rowsNum
+        self.columnsNum = columnsNum
+    }
+    
+    init(rowsNum : Int, columnsNum : Int){
+        self.elements = [Double](count: rowsNum * columnsNum, repeatedValue: 0)
+        for pivot in 0...(rowsNum * columnsNum - 1) { self.elements[pivot] = Double(rand())/Double(RAND_MAX) }
         self.rowsNum = rowsNum
         self.columnsNum = columnsNum
     }
@@ -46,7 +54,14 @@ class Matrix{
         }
         return res
     }
-
+    
+    //both modificates original matrix and returns new with changed elements (not sure if this is a good idea)
+    //TODO: think about something more elegant, maybe?
+    
+    func map(transform: (Double) -> Double) -> Matrix{
+        elements = elements.map(transform)
+        return Matrix(elements: elements, rowsNum: rowsNum, columnsNum: columnsNum)
+    }
 }
 
 
