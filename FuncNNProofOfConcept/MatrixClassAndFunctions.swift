@@ -36,7 +36,7 @@ class Matrix{
     }
     
     func description() -> String{
-        var res = ""
+        var res = "Matrix \(rowsNum) x \(columnsNum):\n"
         for row in 0...(rowsNum - 1) {
             for col in 0...(columnsNum - 1){
                 res += getElement(row, col: col).description
